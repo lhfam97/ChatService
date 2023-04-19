@@ -17,7 +17,7 @@ type Message struct {
 	CreatedAt time.Time
 }
 
-func newMessage(role, content string, model *Model) (*Message, error) {
+func NewMessage(role, content string, model *Model) (*Message, error) {
 	totalTokens := tiktoken_go.CountTokens(model.GetModelName(), content)
 	msg := &Message{
 		ID:        uuid.New().String(),
@@ -30,7 +30,6 @@ func newMessage(role, content string, model *Model) (*Message, error) {
 	if err := msg.Validate(); err != nil {
 		return nil, err
 	}
-
 	return msg, nil
 }
 
